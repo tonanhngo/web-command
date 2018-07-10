@@ -8,11 +8,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" type="text/css" href="styles.css" />
 	<title>Trial v0.3</title>
-
 	<script src="p5.min.js"></script>
 	<script src="p5.sound.js"></script>
 	<script src="p5.dom.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.sound.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7"></script>
 	<script src="Tenssketch.js"></script>
 
@@ -28,7 +26,7 @@
 	<p>Test V0.3</p>
 	<br>
 	<br>
-
+  <button id="mic" style="height:35px;" onclick="startRec()"><img height="25" width="15" src="mic.png"/></button> <br> <br>
 	<button onclick="scrollWindow(0,50)">scroll Down</button> <br> <br>
 	<button onclick="scrollWindow(0,-50)">scroll Up</button> <br> <br>
 	<button onclick="scrollWindow(50,0)">scroll Right</button> <br> <br>
