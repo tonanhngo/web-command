@@ -8,66 +8,75 @@ var offsetIndex=0;
 var Noise;
 var sum;
 var playflag=false;
+var playFlagLevel=false;
 
-//global objects
 var myHeading = document.querySelector('h1');
-var recorder = new p5.SoundRecorder(); // recorder object
+var recorder = new p5.SoundRecorder();
 var soundFile;
 var mic;
+var fft;
+var queueLength = 100;
+var recordTreshold = 0.06;
+var playBack = false;
 
 
 
 function setup() // always executes first
 {
+
+  createCanvas(700,400);
+  noFill();
   //myHeading.textContent = 'Recording!';
   Noise=0;
-
-  //tf.tensor([1, 2, 3, 4]).print(); //just testing
-  //tf.tensor2d([1, 2, 3, 5], [2, 2]).print(); //just testing
+  sum=0;
 
   mic = new p5.AudioIn();
   mic.start();
-  i=0;
-  sum=0;
+
+  fft = new p5.FFT();
+  fft.setInput(mic);
+
+
   recorder.setInput(mic);
 }
 
-function startRec()
+function draw() //Infinite loop
 {
-  myHeading = document.querySelector('h1');
-  micButton = document.getElementById('mic');
-  micButton.disabled = true;
-  soundFile = new p5.SoundFile(); // creates a soundfile to save the recorded audio
-  background(0);
 
-  recorder.record(soundFile);
-  myHeading.textContent= 'Recording!';
-  setTimeout(stopRec, 2000);
-  playflag = true;
-}
-
-function draw() //loops infinitely
-{
-  if (!playflag) return;
-
-  background(0);
   micLevel = mic.getLevel();
   pushVals(micLevel);
   Noise= avgLevel;
-  if(i<999)
-  {
-  //tf.scalar(micLevel).print(); //prints the amplitude values of the audio samples
-  //tf.scalar(Noise).print();
-    i++;
+
+  if (micLevel >= Noise + recordTreshold && !playFlagLevel) {
+    startRec();
   }
-  ellipse(width/2, constrain(height-micLevel*height*5, 0, height), 10, 10);
+
+
+
+  //used to visualise the audio
+
+  /*background(0);
+  ellipse(width/2, constrain(height-micLevel*height*5, 0, height), 10, 10);*/
+
+   background(200);
+   var spectrum = fft.analyze();
+   beginShape();
+   for (i = 0; i<spectrum.length; i++) {
+    vertex(i, map(spectrum[i], 0, 255, height, 0) );
+   }
+   endShape();
 }
 
-function scrollWindow(x, y) //function used to scroll through the page
+
+//function used to scroll through the page
+function scrollWindow(x, y)
 {
-    window.scrollBy(x, y);// x is horizontal and y is vertical
+    window.scrollBy(x, y);// x is horizontal (L & R) and y is vertical (U & D)
 }
 
+
+
+// maintains a stack of audio levels to calculate the amount of ambient noise
 function pushVals(val)
 {
   sum+=val;
@@ -101,7 +110,26 @@ function pushVals(val)
   avgLevel=sum/levels.length;
 }
 
-//funstion to stop recording audio file and play it back
+
+//function to start recording the audio file
+function startRec()
+{
+  myHeading = document.querySelector('h1');
+  micButton = document.getElementById('mic');
+  micButton.disabled = true;
+  soundFile = new p5.SoundFile(); // creates a soundfile to save the recorded audio
+  background(0);
+
+  recorder.record(soundFile);
+  myHeading.textContent= 'Recording!';
+  setTimeout(stopRec, 2000);
+  playflag = true;
+  playFlagLevel = true;
+
+}
+
+
+//function to stop recording audio file and play it back
 function stopRec()
 {
   myHeading = document.querySelector('h1');
@@ -109,13 +137,15 @@ function stopRec()
   micButton.disabled = false;
   myHeading.textContent= 'Not Recording!';
   recorder.stop();
-  soundFile.play();
+  if (playBack)
+    soundFile.play();
   playflag = false;
+  playFlagLevel = false;
 }
 
-function show(paramz)
+function playBackToggle()
 {
-  tf.tensor(paramz).print();
+  playBack=!playBack;
 }
 
 
