@@ -1,0 +1,22 @@
+body{
+  height: 5000px;
+  width: 5000px;
+
+}
+button
+{
+  margin-bottom: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+h1 {
+  font-size: 30px;
+  text-align: left;
+}
+h1 {
+  margin: 0;
+  padding: 20px 0;
+  color: #000000;
+  text-shadow: 1px 1px 1px black;
+}

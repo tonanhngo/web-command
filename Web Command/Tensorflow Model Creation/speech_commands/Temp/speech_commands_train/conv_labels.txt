@@ -1,0 +1,6 @@
+_silence_
+_unknown_
+scroll_up
+scroll_down
+scroll_left
+scroll_right

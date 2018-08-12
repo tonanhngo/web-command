@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<title>Data Set Generator</title>
+	<script src="p5.min.js"></script>
+	<script src="p5.sound.js"></script>
+	<script src="p5.dom.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7"></script>
+	<script src="Sketch.js"></script>
+
+</head>
+
+<body>
+
+	<h1>Not Recording!</h1>
+	<h2>Speaker id: 0</h2>
+	
+	<button id="mic" style="height:35px;" onclick="startRec()"><img height="25" width="15" src="mic.png"/></button>
+	<!--button id="auto" onclick="Autorec">Toggle Auto Record</button-->
+	<!--button id="rec flag" style="height:35px;" onclick="setflag()">auto download</button-->
+	<br>
+	<p>Input Nickname:</p>
+	<form>
+        <input id="textbox" type="text" />
+  </form>
+	<p>Choose what you want to record (scroll up by default):</p>
+	<button id="scr_up" onclick="SrUp()">Scroll_up</button>
+	<br>
+	<button id="scr_dwn" onclick="SrDw()">Scroll_down</button>
+	<br>
+	<button id="scr_lt" onclick="SrLt()">Scroll_left</button>
+	<br>
+	<button id="scr_rt" onclick="SrRt()">Scroll_right</button>
+	<br>
+	<button id="increment" style="width:300px; height:50px;"onclick="incrementSpeaker()">Increment Speaker</button>
+	<button id="decrement" style="width:300px; height:50px;"onclick="decrementSpeaker()">Decrement Speaker</button>
+	<button id="download1" style="width:300px; height:50px;"onclick="downloadSf()">Download Wav File</button>
+	<br>
+</body>
+
+</html>
