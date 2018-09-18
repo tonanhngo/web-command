@@ -1,3 +1,5 @@
+var keywords=['SCROLL UP','SCROLL DOWN','SCROLL LEFT','SCROLL DOWN'];
+
 var langs =
 [['Afrikaans',       ['af-ZA']],
  ['Bahasa Indonesia',['id-ID']],
@@ -97,7 +99,7 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.onstart = function() {
     recognizing = true;
     showInfo('info_speak_now');
-    start_img.src = 'mic-animate.png';
+    start_img.src = 'mic-slash.png';
   };
 
   recognition.onerror = function(event) {
@@ -152,6 +154,7 @@ if (!('webkitSpeechRecognition' in window)) {
       } else {
         interim_transcript += event.results[i][0].transcript;
       }
+      //Add code to process result and reset here.....................
     }
     final_transcript = capitalize(final_transcript);
     final_span.innerHTML = linebreak(final_transcript);
@@ -178,7 +181,7 @@ function capitalize(s) {
   return s.replace(first_char, function(m) { return m.toUpperCase(); });
 }
 
-function createEmail() {
+/*function createEmail() {
   var n = final_transcript.indexOf('\n');
   if (n < 0 || n >= 80) {
     n = 40 + final_transcript.substring(40).indexOf(' ');
@@ -186,9 +189,9 @@ function createEmail() {
   var subject = encodeURI(final_transcript.substring(0, n));
   var body = encodeURI(final_transcript.substring(n + 1));
   window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
-}
+}*/
 
-function copyButton() {
+/*function copyButton() {
   if (recognizing) {
     recognizing = false;
     recognition.stop();
@@ -196,9 +199,9 @@ function copyButton() {
   copy_button.style.display = 'none';
   copy_info.style.display = 'inline-block';
   showInfo('');
-}
+}*/
 
-function emailButton() {
+/*function emailButton() {
   if (recognizing) {
     create_email = true;
     recognizing = false;
@@ -209,13 +212,15 @@ function emailButton() {
   email_button.style.display = 'none';
   email_info.style.display = 'inline-block';
   showInfo('');
-}
+}*/
 
-function startButton(event) {
+function startButton(event) //Starts recording or stops recording call to toggle
+{
   if (recognizing) {
     recognition.stop();
     return;
   }
+  console.log(final_transcript);
   final_transcript = '';
   recognition.lang = select_dialect.value;
   recognition.start();
@@ -247,8 +252,8 @@ function showButtons(style) {
     return;
   }
   current_style = style;
-  copy_button.style.display = style;
-  email_button.style.display = style;
-  copy_info.style.display = 'none';
-  email_info.style.display = 'none';
+  //copy_button.style.display = style;
+  //email_button.style.display = style;
+  //copy_info.style.display = 'none';
+  //email_info.style.display = 'none';
 }

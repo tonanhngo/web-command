@@ -75,3 +75,9 @@ a:hover {
   background-color:transparent;
   padding: 0;
 }
+#start_img{
+  display: block;
+  alignment: right;
+  height: 40px;
+  width: auto;
+}
