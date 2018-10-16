@@ -2,7 +2,7 @@
 This webpage assists with generation of a dataset.
 the naming format followed is:
 
-<command>_<nickname>_<id>_nohash.wav
+command_nickname_id_nohash.wav
 
 example:
 scroll_down_John_1_nohash.wav
