@@ -5,8 +5,8 @@ the naming format followed is:
 command_nickname_id_nohash.wav
 
 example:
-scroll_down_John_1_nohash.wav
-scroll_down_John_1_nohash(1).wav
+scroll_down_John_1_nohash.wav;
+scroll_down_John_1_nohash(1).wav;
 scroll_down_John_1_nohash(2).wav
 
 Note: Everything that appears after “nohash” is ignored
